@@ -1,0 +1,15 @@
+[http.routers]
+  [http.routers.arbitrum-rtr]
+      entryPoints = ["https"]
+      rule = "Host(`arbitrum.<your domain>`)"
+      service = "arbitrum-svc"
+      middlewares = ["basic-auth"]         # comment out to disable
+      [http.routers.arbitrum-rtr.tls]
+        certresolver = "dns-cloudflare"
+
+[http.services]
+  [http.services.arbitrum-svc]
+    [http.services.arbitrum-svc.loadBalancer]
+      passHostHeader = true
+      [[http.services.arbitrum-svc.loadBalancer.servers]]
+        url = "http://192.168.50.102:8547" # or external host's IP:port, assumes default rpc http port 8547 for Arbitrum

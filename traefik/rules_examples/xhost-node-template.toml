@@ -1,0 +1,15 @@
+[http.routers]
+  [http.routers.$NODE_NAME-rtr]
+      entryPoints = ["https"]
+      rule = "Host(`$NODE_NAME.$DOMAINNAME`)"
+      service = "$NODE_NAME-svc"
+      middlewares = ["basic-auth"]
+      [http.routers.$NODE_NAME-rtr.tls]
+        certresolver = "dns-cloudflare"
+
+[http.services]
+  [http.services.$NODE_NAME-svc]
+    [http.services.$NODE_NAME-svc.loadBalancer]
+      passHostHeader = true
+      [[http.services.$NODE_NAME-svc.loadBalancer.servers]]
+        url = "$SERVICE_URL:$SERVICE_PORT" # or whatever your external host's IP:port is

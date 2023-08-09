@@ -1,0 +1,15 @@
+[http.routers]
+  [http.routers.starknet-rtr]
+      entryPoints = ["https"]
+      rule = "Host(`starknet.<your domain>`)"
+      service = "starknet-svc"
+      middlewares = ["basic-auth"]            # comment out to disable
+      [http.routers.starknet-rtr.tls]
+        certresolver = "dns-cloudflare"
+
+[http.services]
+  [http.services.starknet-svc]
+    [http.services.starknet-svc.loadBalancer]
+      passHostHeader = true
+      [[http.services.starknet-svc.loadBalancer.servers]]
+        url = "http://192.168.50.103:6060" # or external host's IP:port, assumes default rpc http port 6060 for StarkNet

@@ -8,13 +8,13 @@ services:
     pid: host
     restart: always
     networks:
-      - traefik_proxy
+      - net
 #    ports:
 #      - "61208:61208"
     security_opt:
       - no-new-privileges:true
     volumes:
-      - $USERDIR/docker/glances:/glances/conf # Use this if you want to add a glances.conf file
+#      - $USERDIR/docker/glances:/glances/conf # Use this if you want to add a glances.conf file
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       - GLANCES_OPT=-w
@@ -24,11 +24,11 @@ services:
       - "traefik.http.routers.glances-rtr.entrypoints=https"
       - "traefik.http.routers.glances-rtr.rule=Host(`glances.$DOMAINNAME`)"
       ## Middlewares
-      - "traefik.http.routers.glances-rtr.middlewares=secure-chain@file"
+      - "traefik.http.routers.glances-rtr.middlewares=basic-auth@file"
       ## HTTP Services
       - "traefik.http.routers.glances-rtr.service=glances-svc"
       - "traefik.http.services.glances-svc.loadbalancer.server.port=61208"
 
 networks:
-  traefik_proxy:
+  net:
     external: true

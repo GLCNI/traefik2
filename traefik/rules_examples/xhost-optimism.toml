@@ -1,0 +1,15 @@
+[http.routers]
+  [http.routers.optimism-rtr]
+      entryPoints = ["https"]
+      rule = "Host(`optimism.<your domain>`)"
+      service = "optimism-svc"
+      middlewares = ["basic-auth"]          # comment out to disable
+      [http.routers.optimism-rtr.tls]
+        certresolver = "dns-cloudflare"
+
+[http.services]
+  [http.services.optimism-svc]
+    [http.services.optimism-svc.loadBalancer]
+      passHostHeader = true
+      [[http.services.optimism-svc.loadBalancer.servers]]
+        url = "http://192.168.50.104:<port>" # or external host's IP:port, 

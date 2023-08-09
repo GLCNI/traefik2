@@ -1,0 +1,15 @@
+[http.routers]
+  [http.routers.ethereum-rtr]
+      entryPoints = ["https"]
+      rule = "Host(`ethereum.<your domain>`)"
+      service = "ethereum-svc"
+      middlewares = ["basic-auth"]      # comment out to disable 
+      [http.routers.ethereum-rtr.tls]
+        certresolver = "dns-cloudflare"
+
+[http.services]
+  [http.services.ethereum-svc]
+    [http.services.ethereum-svc.loadBalancer]
+      passHostHeader = true
+      [[http.services.ethereum-svc.loadBalancer.servers]]
+        url = "http://192.168.50.101:8545" # or external host's IP:port, assumes default rpc http port 8545 for Ethereum

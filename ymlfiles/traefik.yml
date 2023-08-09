@@ -8,7 +8,7 @@ services:
 ## Traefik - Reverse Proxy
   traefik:
     container_name: traefik
-    image: traefik:picodon # the picodon tag refers to v2.3.x
+    image: traefik:v2.10.4
     restart: always
     command: # CLI arguments
       - --global.checkNewVersion=true
