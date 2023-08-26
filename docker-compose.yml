@@ -48,7 +48,7 @@ services:
       - --certificatesResolvers.dns-cloudflare.acme.email=$CLOUDFLARE_EMAIL
       - --certificatesResolvers.dns-cloudflare.acme.storage=/acme.json
       - --certificatesResolvers.dns-cloudflare.acme.dnsChallenge.provider=cloudflare
-      - --certificatesresolvers.dns-cloudflare.acme.dnschallenge.resolvers=$DNS_RESOLVER # pihole IP
+      - --certificatesresolvers.dns-cloudflare.acme.dnschallenge.resolvers=$CLOUDFLARE_RESOLVER
     networks:
       net:
         ipv4_address: 192.168.50.254
