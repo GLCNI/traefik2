@@ -39,21 +39,21 @@ this domain name will be used for variable `$DOMAINAME` later
 
 Profile > DNS > Records > add record
 
-`Type= A`
-`Name= <YOUR DOMAIN NAME>`
-`Content= <Your Public IP of the Host machine (Traefik)>`
-`Proxy Status= DNS only`  
-`TTL= Auto`
+-`Type= A`
+-`Name= <YOUR DOMAIN NAME>`
+-`Content= <Your Public IP of the Host machine (Traefik)>`
+-`Proxy Status= DNS only`  
+-`TTL= Auto`
 
 **3. Create sub-domains Records for each service**
 
 Domain profile > create sub-domains for number of services
 
-`Type= CNAME`
-`Name= <Any Name (advised to make relevant eg. ethereum)>`
-`Content=<YOUR DOMAIN NAME>`  
-`Proxy Status= DNS only`  
-`TTL= Auto`
+-`Type= CNAME`
+-`Name= <Any Name (advised to make relevant eg. ethereum)>`
+-`Content=<YOUR DOMAIN NAME>`  
+-`Proxy Status= DNS only`  
+-`TTL= Auto`
 
 ### Step 3: Setup Docker Networking for Node Services
 
@@ -120,7 +120,7 @@ From this, I have edited the configurations to better fit for node-services such
 
 **Clone Repo**
 ```
-mkdir docker
+mkdir docker && cd docker
 git clone https://github.com/GLCNI/traefik2.git
 ```
 ## Setup Traefik
@@ -151,6 +151,8 @@ CLOUDFLARE_EMAIL=""     # your CloudFlare account Email
 TRAEFIK2DIR=""          # enter the full path to the working directory where repo was cloned
 CLOUDFLARE_API_KEY=""   # This is your Global API Key  
 ```
+
+Global API key can be found on Cloudflar account: `profile > API tokens > Global API Key > View`
 
 **2. Setup password for basic-auth**
 
